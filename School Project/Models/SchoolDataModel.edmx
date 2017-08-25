@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SzkolaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Personal_Data">
+          <Key>
+            <PropertyRef Name="Pesel" />
+          </Key>
+          <Property Name="Pesel" Type="numeric" Precision="11" Scale="0" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="Data_Urodzenia" Type="date" />
+          <Property Name="Telefon" Type="numeric" Precision="9" Scale="0" />
+          <Property Name="Miasto" Type="char" MaxLength="30" />
+          <Property Name="Adres" Type="char" MaxLength="30" />
+          <Property Name="Email" Type="char" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="30" />
+          <Property Name="Password" Type="varchar" MaxLength="30" />
+          <Property Name="Imie" Type="char" MaxLength="20" />
+          <Property Name="Nazwisko" Type="char" MaxLength="30" />
+          <Property Name="Rodzaj" Type="char" MaxLength="30" />
+        </EntityType>
+        <Association Name="FK_Personal_Data_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Personal_Data" Type="Self.Personal_Data" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Personal_Data">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SzkolaModelStoreContainer">
+          <EntitySet Name="Personal_Data" EntityType="Self.Personal_Data" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Personal_Data_User" Association="Self.FK_Personal_Data_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Personal_Data" EntitySet="Personal_Data" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SzkolaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Imie" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="Nazwisko" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="Rodzaj" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Personal_Data" Relationship="SzkolaModel.FK_Personal_Data_User" FromRole="User" ToRole="Personal_Data" />
+        </EntityType>
+        <EntityContainer Name="SzkolaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="Personal_Data" EntityType="SzkolaModel.Personal_Data" />
+          <AssociationSet Name="FK_Personal_Data_User" Association="SzkolaModel.FK_Personal_Data_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Personal_Data" EntitySet="Personal_Data" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Personal_Data">
+          <Key>
+            <PropertyRef Name="Pesel" />
+          </Key>
+          <Property Name="Pesel" Type="Decimal" Nullable="false" Precision="11" Scale="0" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="Data_Urodzenia" Type="DateTime" Precision="0" />
+          <Property Name="Telefon" Type="Decimal" Precision="9" Scale="0" />
+          <Property Name="Miasto" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="Adres" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="User" Relationship="SzkolaModel.FK_Personal_Data_User" FromRole="Personal_Data" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Personal_Data_User">
+          <End Type="SzkolaModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="SzkolaModel.Personal_Data" Role="Personal_Data" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Personal_Data">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SzkolaModelStoreContainer" CdmEntityContainer="SzkolaEntities">
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="SzkolaModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Imie" ColumnName="Imie" />
+                <ScalarProperty Name="Nazwisko" ColumnName="Nazwisko" />
+                <ScalarProperty Name="Rodzaj" ColumnName="Rodzaj" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Personal_Data">
+            <EntityTypeMapping TypeName="SzkolaModel.Personal_Data">
+              <MappingFragment StoreEntitySet="Personal_Data">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="Miasto" ColumnName="Miasto" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Data_Urodzenia" ColumnName="Data_Urodzenia" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Pesel" ColumnName="Pesel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

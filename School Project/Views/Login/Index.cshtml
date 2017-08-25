@@ -1,0 +1,63 @@
+﻿
+@model School_Project.Models.Data
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Contents/Home/Home.css" type="text/css" />
+    <link rel="stylesheet" href="~/Contents/icons/css/fontello.css" type="text/css" />
+
+
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
+
+    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+    <title>Strona główna</title>
+</head>
+<body>
+    <div id="container">
+        <div id="menu">
+            <div id="logo"></div>
+        </div>
+
+        <div id="logowanie">
+            <form action="/Login/Auth" method="post">
+
+                <div class="login">
+                    <input type="text" name="UserName" id="UserName" placeholder="login" onfocus="this.placeholder=''"
+                           onblur="this.placeholder='login'" required />
+                    <i class="icon-user-1"></i>
+                </div>
+
+                <div class="pass">
+                    <input type="password" name="Password" id="Password" placeholder="hasło" onfocus="this.placeholder=''"
+                           onblur="this.placeholder='hasło'" required/>
+                    <i class="icon-lock"></i>
+                </div>
+
+                <div style="color:#ffd800; font-size:20px; padding-top:20px; text-align:center; font-weight:bold; "class="error">@ViewBag.Error </div>
+
+                
+                     
+              
+                <input id="login_button" type="submit" value="Zaloguj się" />
+
+               
+
+            </form>
+
+            
+          
+        </div>
+       
+
+    </div>
+
+   
+    
+
+</body>
+</html>

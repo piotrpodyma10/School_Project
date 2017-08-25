@@ -1,0 +1,115 @@
+﻿@model IEnumerable<School_Project.Models.Data>
+@using School_Project.Models
+@{
+    Layout = "~/View/Main_Layout.cshtml";
+
+    
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Strona Nauczyciela</title>
+
+    <link rel="stylesheet" href="~/Contents/Others/Personal_Data.css" type="text/css" />
+
+    <style>
+        td {
+            border: 3px solid black;
+        }
+    </style>
+   
+   
+</head>
+<body>
+
+ 
+    
+    <div id="container">
+        @if (Model != null) {
+    <div id="table" style="background-color: white; color:black; margin-left:5%;
+            margin-top:5%; width:35%; border:solid 5px;">
+        <table class="test" cellpadding="10" style="align-items:center; text-align:center; width:100%;  border-collapse: collapse; font-size:18px;">
+
+            @foreach(var item in Model)
+                {
+                
+                <tr>
+                    <th style="font-size:20px; text-align:left;padding:10px;">Dane osobowe</th>
+
+                </tr>
+               
+
+                <tr >
+                    <td>
+                        <b>Imię: </b>
+                    </td>
+                    <td>@item.Imie</td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <b>Nazwisko: </b>
+                    </td>
+                    <td>@item.Nazwisko</td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <b>Data urodzenia: </b>
+                    </td>
+                    <td>@item.Data_Urodzenia.ToShortDateString()</td>
+
+                </tr>
+
+                <tr>
+                    <td>
+                        <b>Pesel: </b>
+                    </td>
+                    <td>@item.Pesel</td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <b>Rodzaj użytkownika: </b>
+                    </td>
+                    <td>
+                        @item.Rodzaj
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <b>Miasto: </b>
+                    </td>
+                    <td>@item.Miasto</td>
+
+                </tr>
+
+                <tr>
+                    <td>
+                        <b>Adres: </b>
+                    </td>
+                    <td>@item.Adres</td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <b>Numer telefonu: </b>
+                    </td>
+                    <td>@item.Telefon</td>
+                </tr>
+        }
+
+
+            <tr></tr>
+
+        </table>
+    </div>
+       }
+
+
+    </div>
+</body>
+</html>

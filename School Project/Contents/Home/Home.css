@@ -1,0 +1,198 @@
+﻿body {
+
+    background-image: url("../img/19.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #999;
+
+    margin-left:0px;
+    margin-right:0px;
+    margin-top:15px;
+}
+
+#container {
+    width:100%;
+    height:460px;
+    margin-left:0px;
+    margin-right:0px;
+
+}
+
+
+#menu {
+    background-image: url("../img/logo_text.png");
+    background-position-x:40%;
+    background-repeat: no-repeat;
+    height: 120px;
+    width: 100%;
+    background-color: rgba(46, 46, 31, 0.7);
+    margin: 0px;
+}
+
+#logo {
+    height:120px;
+    width:200px;
+    
+    background-repeat:no-repeat;
+    
+}
+
+
+
+
+
+
+.field-validation-error {
+    height:50px;
+    width:120px;
+} 
+
+
+
+#logowanie {
+    background-color: rgba(46, 46, 31, 0.7);
+    width: 300px;
+    padding: 50px;
+    margin-left: 55%;
+    margin-top: 8%;
+    border-radius: 5px;
+    -webkit-box-shadow: 10px 10px 32px -2px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 32px -2px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 32px -2px rgba(0,0,0,0.75);
+}
+
+
+
+
+
+input[type=text],
+input[type=password]
+{
+    width:300px;
+    background-color: #efefef;
+    color:#666;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size:20px;
+    padding:10px;
+    box-sizing: border-box;
+    outline:none;
+    margin-top:10px;
+    
+
+}
+
+    input[type=text]:focus,
+    input[type=password]:focus {
+        -webkit-box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.75);
+        box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.75);
+        border: 3px solid #008ae6;
+        background-color: #f2f2f2;
+        color: #428c42;
+    }
+
+
+
+
+
+input[type=submit] {
+    width: 300px;
+    background-color: #2db300;
+    font-size: 20px;
+    color: white;
+    padding: 15px 10px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    letter-spacing: 2px;
+    box-sizing: border-box;
+    outline: none;
+    -webkit-box-shadow: 0px 0px 12px 2px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 12px 2px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 12px 2px rgba(0,0,0,0.75);
+}
+
+
+input[type=submit]:focus 
+{
+    -webkit-box-shadow: 0px 0px 12px 4px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 12px 4px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 12px 4px rgba(0,0,0,0.75);
+}
+
+
+
+input[type=submit]:hover
+{
+    background-color:green;
+}
+
+
+
+input::-webkit-input-placeholder
+{
+    color: #999;
+}
+
+input:focus::-webkit-input-placeholder
+{
+    color: #428c42;
+}
+
+/* Firefox < 19 */
+input:-moz-placeholder
+{
+    color: #999;
+}
+
+input:focus:-moz-placeholder
+{
+    color: #428c42;
+}
+
+/* Firefox > 19*/
+input::-moz-placeholder
+{
+    color:#999;
+}
+
+input:focus::-moz-placeholder
+{
+    color: #428c42;
+}
+
+/* Internet Explorer 10*/
+input:-ms-input-placeholder
+{
+    color:#999;
+}
+
+input:focus:-ms-input-placeholder
+{
+    color:#428c42
+}
+
+.login input[type=text],
+.pass input[type=password] {
+    padding-left:40px;
+}
+
+.login,
+.pass {
+    position:relative;
+}
+
+.login i,
+.pass i {
+    position:absolute;
+    left:0;
+    top:20px;
+}
+
+
+
+

@@ -1,0 +1,31 @@
+﻿
+
+<link rel="stylesheet" href="~/Contents/icons/Part_II/css/fontello.css" type="text/css" />
+<link rel="stylesheet" href="~/Contents/Main_Layout/Layout.css" />
+
+<div id="menu">
+    <div id="space"></div>
+    <div id="logo"></div>
+    <div id="box">
+        <div id="powitanie">@ViewBag.powitanie</div>
+        <div id="Home"><a href="/Login/Refresh">
+            <div id="icon_home"><i class="icon-home"></i></div>
+            <div id="home_tekst">Home</div></a>
+
+        </div>
+        <div id="dane_osobowe"><a href="/Login/Personal_Data">
+            <div id="icon"><i class="icon-user"></i></div>
+            <div id="dane_tekst">Dane osobowe</div></a>
+        </div>
+       
+        <div id="wylogowanie"><a href="/Login/Logout">
+            <div id="icon-2"><i class="icon-logout"></i></div>
+            <div id="wylog_tekst"> Wyloguj się</div></a>
+        </div>
+
+
+</div>
+    
+
+</div>
+@RenderBody()

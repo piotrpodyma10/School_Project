@@ -1,0 +1,168 @@
+﻿#menu {
+    
+    height: 100px;
+    width: 100%;
+    background-color: rgba(46, 46, 31, 0.7);
+    margin: 0px;
+    margin-top: 15px;
+}
+
+#space {
+    float:left;
+    height:inherit;
+    width:3%;
+}
+
+#logo {
+    background-image: url("../img/logo_text.png");
+    background-size: 100% 100%;
+    background-position-x:120%;
+    background-repeat: no-repeat;
+    width: 40%;
+    height: inherit;
+    margin-right:auto;
+    float:left;
+}
+
+
+#box {
+    height: inherit;
+    width: 57%;
+    font-size: 20px;
+    color: white;
+    
+    text-align: right;
+    float:left;
+    max-width:57%
+}
+
+#powitanie {
+    height: inherit;
+    width: 38%;
+    color: greenyellow;
+    font-size: 18px;
+    font-weight: bold;
+    float: left;
+    text-align: right;
+    padding-right: 2%;
+    line-height: 100px;
+    vertical-align: middle;
+}
+
+
+#Home {
+    width: 20%;
+    height: inherit;
+    float: left;
+    margin: auto;
+    text-align: center;
+}
+
+
+
+#icon_home {
+    width: 100%;
+    height: 50%;
+    /*position: relative;
+    top: 15%;
+    margin: auto;*/
+    display: flex;
+    align-items:flex-end;
+    justify-content: center;
+}
+
+
+
+
+
+#home_tekst {
+    width: 100%;
+    height: 50%;
+    line-height: 200%;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 18px;
+    color:white;
+}
+
+
+
+
+
+
+#dane_osobowe {
+    height:inherit;
+    width:20%;
+    float:left;
+    
+    font-size:18px;
+    color:white;
+    text-align:center;
+}
+
+    #dane_osobowe:hover,
+    #wylogowanie:hover,
+    #Home:hover {
+        background-color: black;
+        cursor: pointer;
+    }
+
+#wylogowanie {
+    height: inherit;
+    width: 20%;
+    color: black;
+    font-size: 18px;
+    float: left;
+    
+   
+    
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    
+}
+
+#icon {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    align-items:flex-end;
+    justify-content: center;
+    text-align: center;
+}
+
+
+
+
+
+#dane_tekst {
+    width: 100%;
+    height: 50%;
+    line-height: 200%;
+    vertical-align: middle;
+    text-align: center;
+}
+
+#icon-2 {
+    width: 100%;
+    height: 50%;
+    margin: auto;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+#wylog_tekst {
+    height: 50%;
+    width: 100%;
+    color: white;
+    /*position: relative;
+    top: 10%;
+    margin: auto;*/
+    line-height: 200%;
+    vertical-align: middle;
+    text-align:center;
+    
+}

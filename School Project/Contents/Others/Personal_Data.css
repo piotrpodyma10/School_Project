@@ -1,0 +1,11 @@
+﻿body {
+    background-image: url("../img/16.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #999;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 15px;
+}
