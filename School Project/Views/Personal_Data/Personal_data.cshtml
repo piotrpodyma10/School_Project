@@ -14,9 +14,15 @@
 
     <link rel="stylesheet" href="~/Contents/Others/Personal_Data.css" type="text/css" />
 
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+
     <style>
         td {
-            border: 3px solid black;
+            //border: 3px solid black;
+        }
+
+        b{
+            font-weight:normal;
         }
     </style>
    
@@ -28,22 +34,23 @@
     
     <div id="container">
         @if (Model != null) {
-    <div id="table" style="background-color: white; color:black; margin-left:5%;
-            margin-top:5%; width:35%; border:solid 5px;">
-        <table class="test" cellpadding="10" style="align-items:center; text-align:center; width:100%;  border-collapse: collapse; font-size:18px;">
+    <div id="table" style="margin-left:40%; margin-top:20px; font-family:monospace; font-weight:normal;
+             width:30%; text-align:left;">
+        <table class="test" cellpadding="4" cellspacing="1" border="0" style="font-weight:normal; text-align:left; width:100%;  font-size:20px; color:black; font-family: 'Gloria Hallelujah', cursive;
+    text-shadow: 4px 4px 3px rgba(0,0,0,0.1); ">
 
             @foreach(var item in Model)
                 {
                 
                 <tr>
-                    <th style="font-size:20px; text-align:left;padding:10px;">Dane osobowe</th>
+                    <th style="font-size:22px; text-align:left;padding:10px; padding-right:1px; ">Dane osobowe</th>
 
                 </tr>
                
 
                 <tr >
                     <td>
-                        <b>Imię: </b>
+                        Imię: 
                     </td>
                     <td>@item.Imie</td>
                 </tr>

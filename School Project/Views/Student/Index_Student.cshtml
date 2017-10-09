@@ -1,0 +1,98 @@
+﻿@{
+    Layout = "~/View/Main_Layout.cshtml";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Strona Nauczyciela</title>
+
+    @*<link href='http://fonts.googleapis.com/css?family=Arizonia' rel='stylesheet' type='text/css'>*@
+
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+
+    @*<link rel="stylesheet" href="~/Contents/Home/Home.css" type="text/css" />*@
+
+    <style>
+        body {
+            background-image: url("../../Contents/img/572.png");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: contain;
+            background-color:burlywood;
+            width: 100%;
+            margin-left: 0px;
+            margin-right: 0px;
+            margin-top: 15px;
+            position: relative;
+        }
+
+        #Container {
+            width:69.5%;
+            margin:auto;
+            height:55%;
+            margin-top:6.4%;
+            
+            margin-left:15%;
+        }
+
+        #Second_Menu {
+            width:25%;
+            float:left;
+            height:inherit;
+            
+        }
+
+        #Oceny {
+            width: inherit;
+            height: 100px;
+            background-color: none;
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 100px;
+            text-align: center;
+            font-size: 30px;
+            font-family: 'Gloria Hallelujah', cursive;
+            text-shadow: 4px 4px 3px rgba(0,0,0,0.1);
+            transition: 2s;
+        }
+
+
+            #Oceny:hover {
+                background-color: lawngreen;
+                color: black;
+                transition: 2s;
+            }
+
+
+        @@media screen and (min-width:1400px) {
+        body {
+        background-color:darkgoldenrod; 
+        }
+        #Container {
+            margin-top:9.5%;
+        }
+        }
+
+        #icon-grades {
+            margin-top:40px;
+            padding-right:10px;
+        }
+
+    </style>
+
+
+</head>
+<body>
+
+    <div id="Container">
+        <div id="Second_Menu">
+            <a href="/Student/Student_Grades"><div id="Oceny"><i id="icon-grades" class="icon-chart-bar-1"></i>Moje oceny</div></a>
+</div>
+
+
+    </div>
+</body>
+</html>

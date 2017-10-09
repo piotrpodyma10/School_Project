@@ -96,7 +96,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Contents\Home\Home.css" />
+    <Content Include="Contents\Login\Login.css" />
     <Content Include="Contents\Main_Layout\Layout.css" />
     <Content Include="Contents\Others\Personal_Data.css" />
     <Content Include="Contents\Teacher\Teacher.css" />
@@ -125,13 +125,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Data.cs" />
+    <Compile Include="Models\DataGradesModel.cs" />
+    <Compile Include="Models\Grades.cs" />
     <Compile Include="Models\Personal_Data.cs">
       <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
@@ -150,6 +152,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SchoolDataModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\School_Class.cs">
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\School_Grades.cs">
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Student.cs">
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Teacher.cs">
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>SchoolDataModel.tt</DependentUpon>
     </Compile>
@@ -158,7 +172,6 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
-    <Content Include="Views\Home\Index.cshtml" />
     <EntityDeploy Include="Models\SchoolDataModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SchoolDataModel.Designer.cs</LastGenOutput>
@@ -174,6 +187,12 @@
     <Content Include="Views\Teacher\Index.cshtml" />
     <Content Include="Views\Main_Layout.cshtml" />
     <Content Include="Views\Personal_Data\Personal_data.cshtml" />
+    <Content Include="Views\Teacher\Grades.cshtml" />
+    <Content Include="Views\Teacher\Class_Number.cshtml" />
+    <Content Include="Views\Teacher\Grades_View.cshtml" />
+    <Content Include="Views\Teacher\Grades_View_II.cshtml" />
+    <Content Include="Views\Student\Index_Student.cshtml" />
+    <Content Include="Views\Student\Student_Grades.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

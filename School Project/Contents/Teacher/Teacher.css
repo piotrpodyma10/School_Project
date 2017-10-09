@@ -11,12 +11,62 @@
 }
 
 
-
-
-
 #container {
     width: 100%;
     height: 460px;
     margin-left: 0px;
     margin-right: 0px;
+}
+
+#Wprowadzanie_ocen,
+#Przegląd_Ocen {
+    background-color: rgba(46, 46, 31, 0.7);
+    width: 220px;
+    text-align: center;
+    height: 80px;
+    cursor: pointer;
+    line-height: 80px;
+    vertical-align: middle;
+    text-align: left;
+    padding-left: 10px;
+    color: white;
+    font-size: 16px;
+    margin-left: 15px;
+    margin-top: 15px;
+    font-weight: bold;
+    float:left;
+    
+}
+
+#Wprowadzanie_ocen:hover,
+#Przegląd_Ocen:hover {
+    background-color:black;
+    color:lawngreen;
+}
+
+
+.login,
+.pass {
+    position: relative;
+}
+
+.icon-chart-bar-1 {
+    text-align:left;
+}
+
+#text1 {
+    text-align:left;
+    float:left;
+    width:150px;
+    height:80px;
+    padding-left:10px;
+}
+
+#icon1 {
+    float: left;
+    width: 50px;
+    height: 80px;
+    position: relative;
+    top: 25px;
+    
 }

@@ -11,23 +11,16 @@ namespace School_Project.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Personal_Data
     {
         public decimal Pesel { get; set; }
         public Nullable<int> UserID { get; set; }
-
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy)", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> Data_Urodzenia { get; set; }
         public Nullable<decimal> Telefon { get; set; }
         public string Miasto { get; set; }
         public string Adres { get; set; }
         public string Email { get; set; }
-
-        public virtual User Imie { get; set; }
-        public virtual User Nazwisko { get; set; }
-        public virtual User Rodzaj { get; set; }
     
         public virtual User User { get; set; }
     }

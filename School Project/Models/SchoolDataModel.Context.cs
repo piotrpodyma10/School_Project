@@ -27,5 +27,9 @@ namespace School_Project.Models
     
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<Personal_Data> Personal_Data { get; set; }
+        public virtual DbSet<School_Class> School_Class { get; set; }
+        public virtual DbSet<Teacher> Teacher { get; set; }
+        public virtual DbSet<School_Grades> School_Grades { get; set; }
+        public virtual DbSet<Student> Student { get; set; }
     }
 }

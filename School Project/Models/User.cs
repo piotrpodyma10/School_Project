@@ -18,6 +18,8 @@ namespace School_Project.Models
         public User()
         {
             this.Personal_Data = new HashSet<Personal_Data>();
+            this.Teacher = new HashSet<Teacher>();
+            this.Student = new HashSet<Student>();
         }
     
         public int UserID { get; set; }
@@ -29,5 +31,9 @@ namespace School_Project.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Personal_Data> Personal_Data { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Teacher> Teacher { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Student> Student { get; set; }
     }
 }

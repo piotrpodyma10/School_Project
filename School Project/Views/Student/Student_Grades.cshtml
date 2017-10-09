@@ -1,0 +1,271 @@
+﻿@model IEnumerable<School_Project.Models.Grades>
+@{
+    Layout = "~/View/Main_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Oceny</title>
+
+    <style>
+        body {
+            background-image: url("../../Contents/img/124.jpg");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            background-color: burlywood;
+            width: 100%;
+            margin-left: 0px;
+            margin-right: 0px;
+            margin-top: 15px;
+            position: relative;
+            color:white;
+        }
+
+        #Oceny {
+           
+        }
+
+
+        #Oceny2 {
+            background-color: rgba(111,66,1,0.7);
+            width: inherit;
+            transition: 2s;
+        }
+
+            #Oceny2:hover {
+                background-color: rgba(111,66,1,1);
+                transition: 2s;
+                color: black;
+                cursor: pointer;
+            }
+
+
+
+            #Oceny2:nth-child(2n+1):hover {
+                background-color: rgba(0,78,73,1);
+                cursor:pointer;
+                transition: 2s;
+            }
+
+            #Oceny2:nth-of-type(2n+1) {
+                background-color: rgba(0,78,73,0.7);
+                width: inherit;
+                transition: 2s;
+            }
+
+        #Student_Menu {
+            background-color:lightseagreen;
+            float: left;
+            margin-left: 120px;
+            width: 300px;
+            height: 50px;
+            line-height: 50px;
+            text-align: left;
+            font-weight:bold;
+            font-size:18px;
+        }
+
+            #Student_Menu:hover {
+                background-color: lawngreen;
+                transition: 1s;
+                color: black;
+                cursor: pointer;
+            }
+
+         
+
+
+        .Powrot {
+            width: 120px;
+            height: 50px;
+            color: white;
+            position: fixed;
+            line-height: 50px;
+            transition: 1s;
+            background-color:darkmagenta;
+        }
+
+            .Powrot:hover {
+                background-color: lawngreen;
+                color: black;
+                transition: 1s;
+            }
+
+        #icon-back {
+            width: 60px;
+            height: inherit;
+            float: left;
+            top: 50%;
+            left: 10%;
+            transform: translate(-10%,-50%);
+            position: absolute;
+        }
+
+        .Powrot_text {
+            width: 60px;
+            height: inherit;
+            float: left;
+            position: absolute;
+            top: 50%;
+            left: 70%;
+            transform: translate(-70%, -50%);
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .icon-left-big {
+            width: 60px;
+            height: inherit;
+            float: left;
+            top: 70%;
+            left: 10%;
+            transform: translate(-10%,-50%);
+            position: absolute;
+        }
+
+        #Blank, #Blank2 {
+            width: 100%;
+            
+            height: 50px;
+        }
+
+        #icon-graduate {
+            width: 50px;
+            height: inherit;
+            float: left;
+            margin-top:10px;
+            font-size: 16px;
+        }
+
+        #icon-grades {
+            width:50px;
+            height:inherit;
+            float:left;
+            margin-top:10px;
+            margin-left:115px;
+            
+        }
+
+        #Nagłówek_Ocen {
+            width:410px;
+            height:50px;
+            line-height:50px;
+            font-size:18px;
+            font-weight:bold;
+            padding-left:10px;
+            background-color:goldenrod;
+            text-align:left;
+            float:left;
+        }
+
+        #Nagłówek_Ocen:hover {
+            background-color:lawngreen;
+            color:black;
+            transition:1s;
+            cursor:pointer;
+        }
+
+    </style>
+
+
+</head>
+<body>
+    <div id="Container">
+        <a href="/Student/Student_Come_Back">
+            <div class="Powrot">
+                <i id="icon-back2" class="icon-left-big"></i>
+                <div class="Powrot_text">Powrót</div>
+
+            </div>
+        </a>
+        <div id="Student_Menu"><i id="icon-graduate" class="icon-graduation-cap"></i>Uczęszczasz do klasy: @Model.FirstOrDefault().Nazwa_Klasy</div>
+        <div id="Blank"></div>
+        <div id="Nagłówek_Ocen"><i id="icon-grades" class="icon-chart-bar-1"></i>Twoje oceny</div>
+        <div id="Blank2"></div>
+        <div id="Oceny">
+            
+            
+            <div>
+                
+                    @{ 
+                        double srednia = 0;
+                        int ilosc = 0;
+                        double suma = 0;
+                    }   
+
+                    @foreach (var zmienna in ViewBag.Przedmioty)
+                    {
+                        <div id="Oceny2">
+                            <table>
+                                <td>Przedmiot:  @zmienna.przedmiot2.Trim(), prowadzący: @zmienna.Imie2  @zmienna.Nazwisko2</td>
+                                <tr></tr>
+                            </table>
+                            <table>
+                                @foreach (var zmienna2 in Model.Where(xx => xx.Przedmiot == @zmienna.przedmiot2))
+                                {
+
+
+                                    <td width="100px" style="text-align:center;">@zmienna2.Uwagi<table><td width="100px" style="text-align:center;">@zmienna2.Ocena</td></table></td>
+
+                                    ++ilosc;
+                                    ViewBag.Ilosc = ilosc;
+
+                                    suma = suma + zmienna2.Ocena;
+                                    ViewBag.Suma = suma;
+
+
+
+                                }
+
+                                @{
+                                    if (ViewBag.Suma == 0 || ViewBag.Ilosc == 0 || ViewBag.Suma == null || ViewBag.Ilosc == null)
+                                    {
+                                        srednia = 0;
+                                        continue;
+                                    }
+                                    else
+                                    {
+                                        srednia = Math.Round(ViewBag.Suma / ViewBag.Ilosc, 2);
+                                    }
+
+
+                                    string kolor;
+                                    if (srednia <= 3.00)
+                                    {
+                                        kolor = "#ff0000";
+                                    }
+                                    else if (srednia > 3.00 && srednia <= 4.00)
+                                    {
+                                        kolor = "#f7b800";
+                                    }
+                                    else if (srednia > 4.00 && srednia <= 4.80)
+                                    {
+                                        kolor = "#02b902";
+                                    }
+                                    else
+                                    {
+                                        kolor = "#3dff00";
+                                    }
+
+                                }
+
+                                <td width="160px" style="font-size:16px; font-weight:bold; color:@kolor;">Średnia ocen: @srednia</td>
+
+                            </table>
+                        </div>
+                                    }
+
+
+                
+            </div>
+          
+
+        </div>
+    </div>
+</body>
+</html>

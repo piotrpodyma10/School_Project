@@ -44,9 +44,14 @@ namespace School_Project.Controllers
                 {
                     Session["Name"] = adm.UserName;
                     FormsAuthentication.SetAuthCookie(adm.UserName, false);
-                    var text = "Witaj " + adm.UserName + "!";
 
-                    return RedirectToAction("index", "Home", new { wiadomosc = text });
+
+                    imie1 = adm.Imie.Trim();
+                    nazw1 = adm.Nazwisko.Trim();
+                    rodzaj = adm.Rodzaj.Trim();
+                    ID = adm.UserID;
+
+                    return RedirectToAction("Index_Student", "Student");
                 }
 
                 if (adm.Rodzaj.Trim() == "Nauczyciel")
@@ -87,13 +92,23 @@ namespace School_Project.Controllers
             nazw = nazw1;
         }
 
+        public void wyciaganie_ID(out int UserID)
+        {
+            UserID = ID;
+        }
+
+
+
         public ActionResult Refresh()
         {
-            var tekst = "";
-            tekst = rodzaj;
-            
-
-            return RedirectToAction("index", "Teacher");
+            if (rodzaj == "Student")
+            {
+                return RedirectToAction("Index_Student", "Student");
+            }
+            else
+            {
+                return RedirectToAction("index", "Teacher");
+            }
         }
         
         [Authorize]

@@ -1,0 +1,690 @@
+﻿@model IEnumerable<School_Project.Models.Grades>
+@{
+    Layout = "~/View/Main_Layout.cshtml";
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+
+    <style>
+        body {
+            background-image: url("../../Contents/img/1.jpg");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            background-color: #999;
+            margin-left: 0px;
+            margin-right: 0px;
+            margin-top: 15px;
+            color: white;
+            width:auto;
+
+        }
+
+
+
+        .Powrot {
+            width: 120px;
+            height: 48px;
+            color: white;
+            position: fixed;
+            line-height: 50px;
+            transition: 1s;
+            background-color: rgb(2, 62, 51);
+            border: solid 2px white;
+            border-left: none;
+        }
+
+            .Powrot:hover {
+                background-color: lawngreen;
+                color: black;
+                transition: 1s;
+            }
+
+        #icon-back {
+            width: 60px;
+            height: inherit;
+            float: left;
+            top: 50%;
+            left: 10%;
+            transform: translate(-10%,-50%);
+            position: absolute;
+        }
+
+        .Powrot_text {
+            width: 60px;
+            height: inherit;
+            float: left;
+            position: absolute;
+            top: 50%;
+            left: 70%;
+            transform: translate(-70%, -50%);
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .icon-left-big {
+            width: 60px;
+            height: inherit;
+            float: left;
+            top: 70%;
+            left: 10%;
+            transform: translate(-10%,-50%);
+            position: absolute;
+        }
+
+
+        input[type=submit] {
+            width: 120px;
+            height: 54px;
+            color: white;
+            transition: 1s;
+            background-color: rgb(2, 62, 51);
+            font-weight: bold;
+            cursor: pointer;
+            margin: 0px;
+            border: none;
+            font-size: 18px;
+            border:solid 2px white;
+            border-left:none;
+        }
+
+
+
+
+
+        input[type=submit]:hover {
+            background-color: lawngreen;
+            color:black;
+            transition:1s;
+            font-weight:bold;
+        }
+
+       table {
+           border-collapse:collapse;
+
+           text-align:left;
+
+       }
+
+       th, td {
+           text-align:center;
+           /*padding:8px;*/
+       }
+
+        tr:nth-child(even) {
+            background-color:rgba(0, 255, 33,0.4);
+
+        }
+
+
+
+
+        #bar {
+            float: left;
+            width: 480px;
+            background-color: rgb(2, 62, 51);
+            text-align: center;
+            align-items: center;
+            height: 50px;
+            line-height: 50px;
+            font-weight: bold;
+            font-size: 18px;
+            border: solid 2px white;
+            border-left: none;
+            border-bottom: none;
+        }
+
+     option:hover {
+         background-color:lawngreen;
+             color:aqua;
+     }
+
+
+        select, option {
+            background-color:azure;
+            height: 30px;
+            font-size:16px;
+            border:none;
+            cursor:pointer;
+            margin-left:20px;
+            font-weight:bold;
+            color:black;
+
+
+        }
+
+        #Oceny {
+            background-color: rgba(119, 111, 111, 0.7);
+            float: left;
+            border-top: solid 2px white;
+            border-bottom: solid 2px white;
+            width: 100%;
+            transition: 2s;
+            
+        }
+
+
+            #Oceny:hover {
+                background-color: rgba(119, 111, 111, 1);
+                transition: 2s;
+                cursor:pointer;
+            }
+
+        #blank {
+            
+            width:inherit;
+            height:50px;
+            float:left;
+
+        }
+
+        #Bar_Menu {
+            width: 100%;
+            height: 50px;
+            float: left;
+            margin-top: 15px;
+        }
+
+        .show {
+            cursor:pointer;
+        }
+
+        .Oceny2 {
+            background-color: rgba(20, 99, 94, 0.7);
+            width: inherit;
+            transition: 2s;
+            color: white;
+            border-bottom: solid 2px white;
+            
+        }
+
+            .Oceny2:hover {
+                background-color: rgba(20, 99, 94, 1);
+                transition: 2s;
+                color: black;
+                cursor: pointer;
+                color: yellow;
+            }
+
+
+
+            .Oceny2:nth-child(2n+1):hover {
+                background-color: rgba(30, 118, 121, 1);
+                /*rgba(30, 118, 121, 0.7)
+                    rgba(20, 99, 94, 0.7)
+
+                    rgba(20, 99, 32, 1)
+                    rgba(70, 121, 30, 1)
+                */
+                cursor: pointer;
+                transition: 2s;
+                color: yellow;
+            }
+
+            .Oceny2:nth-of-type(2n+1) {
+                background-color: rgba(30, 118, 121, 0.7);
+                width: inherit;
+                transition: 2s;
+                color: white;
+            }
+
+        .tooltiptext {
+            visibility: hidden;
+            width: 170px;
+            background-color: #825b02;
+            color: white;
+            text-align: center;
+            height: 30px;
+            opacity: 0;
+            display: inline-table;
+            line-height: 30px;
+            position: absolute;
+            transition: 1s;
+            border-radius: 6px;
+            margin-left: -90px;
+            margin-top: -130px;
+        }
+        
+        
+
+            .tooltip:hover .tooltiptext {
+                visibility:visible;
+                opacity:1;
+                transition:2s;
+            }
+
+
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            margin-top: 30px;
+            margin-left: -42px;
+            border-width: 10px;
+            border-style: solid;
+            border-color: #825b02 transparent transparent transparent;
+        }
+
+
+
+
+        #loader {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            z-index: 1;
+            width: 90px;
+            height: 90px;
+            margin: -75px 0 0 -75px;
+            border: 16px double white;
+            border-radius: 50%;
+            border-top: 16px groove rgb(34, 146, 139);
+            border-bottom: 16px double white;
+            border-left:16px double lawngreen;
+            border-right:16px double rgb(255, 216, 0);
+            width: 60px;
+            height: 60px;
+            -webkit-animation: spin 1s linear infinite;
+            animation: spin 1s linear infinite;
+        }
+
+@@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Add animation to "page content" */
+.animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 0.5s;
+  animation-name: animatebottom;
+  animation-duration: 0.5s
+}
+
+@@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 }
+  to { bottom:0px; opacity:1 }
+}
+
+@@keyframes animatebottom {
+  from{ bottom:-100px; opacity:0 }
+  to{ bottom:0; opacity:1 }
+}
+
+#container {
+  display: none;
+  
+}
+
+
+       </style>
+
+    <script type="text/javascript">                    
+                var myVar;
+                function myFunction() {
+                    myVar = setTimeout(showPage, 3000);
+                }
+
+                function showPage() {
+                    document.getElementById("loader").style.display = "none";                   
+                    document.getElementById("container").style.display = "block";
+                }
+        </script>  
+</head>
+
+<body onload="myFunction()">
+    <div id="loader"></div>
+        <div id="container">
+            <div id="Bar_Menu">
+                <a href="/Teacher/Come_Back_Grades">
+                    <div class="Powrot">
+                        <i id="icon-back2" class="icon-left-big"></i>
+                        <div class="Powrot_text">Powrót</div>
+                    </div>
+                </a>
+
+                @{
+             double cala_srednia0 = 0;
+             int ilosc0 = 0;
+             double srednia0 = 0;
+
+                }
+            @foreach (var element0 in ViewBag.Zaciaganie)
+            {
+                int liczba0 = 0;
+                double suma = 5;
+                suma = 0;
+
+                foreach( var zmienna3 in Model.Where(xx => xx.StudentID2 == element0.StudentID))
+                {
+
+                    ++liczba0;
+                    ViewBag.liczba0 = liczba0;
+
+
+
+                    suma = suma + zmienna3.Ocena;
+
+
+                    ViewBag.Suma0 = suma;
+
+                }
+                ilosc0 = ilosc0 + 1;
+
+                if (ViewBag.Suma0 == null || ViewBag.liczba0 == null)
+                {
+                    continue;
+                }
+                else
+                {
+                    srednia0 = Math.Round(ViewBag.Suma0 / ViewBag.liczba0, 2);
+                    cala_srednia0 = cala_srednia0 + srednia0;
+
+                    double wynik = Math.Round(cala_srednia0 / ilosc0, 2);
+                    ViewBag.Wynik0 = " Średnia całej klasy wynosi: " + wynik;
+                }
+            }
+                @if (ViewBag.Suma0 == null)
+                {
+                    ViewBag.Wynik0 = "Brak Ocen";
+                }
+                <div style="margin-left:120px; font-size:18px; font-weight:bold; line-height:50px; height:50px; background-color: rgb(2, 62, 51); width:482px; text-align:center; float:left;">
+                    <i class="icon-chart-bar-1" style="text-align:right; position:relative; top:10px; left:90px; padding-right:15px; float:left;"></i>
+                    <div style="text-align:center; border:solid 2px white;">@ViewBag.Wynik0</div>
+                </div>
+
+            </div>
+            <br />
+            <div style="float:left;">
+                <form action="/Teacher/GetPrzedmiot" method="post">
+                    <div id="bar">
+                        Wybierz interesujący Cię przedmiot
+                        <select name="Przedmiot">
+                            @foreach (var element_ in ViewBag.Przedmioty)
+                    {
+                                <option value="@element_.przedmiot2">@element_.przedmiot2</option>
+                    }
+                        </select>
+                    </div>
+                    <div id="blank">
+                        <input type="submit" value="Zatwierdź" />
+                    </div>
+
+                </form>
+            </div>
+
+
+
+            <br />
+
+            <div style="float:left;">
+                <div id="Oceny">
+                    <table>
+
+                        <td width="120px" height="60px">Imie</td>
+                        <td width="120px" height="60px">Nazwisko</td>
+                        
+
+
+                    </table>
+                </div>
+
+                @{
+             double cala_srednia = 0;
+             int ilosc = 0;
+             double srednia = 0;
+
+                }
+
+                @foreach (var element in ViewBag.Zaciaganie)
+                {
+                    <div class="Oceny2" style="display:block; width:100%; float:left;">
+                        <div class="test2" style="height:60px; width:auto; display:inline-table; float:left;">
+
+
+
+                            <div style="height:60px; width:120px; text-align:center; float:left; line-height:60px;">@element.Imie</div>
+                            <div style="height:60px; width:120px; text-align:center; float:left; line-height:60px;">@element.Nazwisko</div>
+
+                            @{
+
+                                    int liczba = 0;
+                                    double suma = 5;
+                                    suma = 0;
+                                    //srednia = 0;
+
+
+                            }
+
+
+
+
+
+                            <div class="show" style="font-size:28px; display:inline-table; height:60px; line-height:60px; float:left;">+</div>
+
+                            @foreach( var zmienna2 in Model.Where(xx => xx.StudentID2 == element.StudentID))
+                {
+                     ++liczba;
+                     ViewBag.liczba = liczba;
+
+                     suma = suma + zmienna2.Ocena;
+                     ViewBag.Suma = suma;
+                }
+
+                            @{
+                                if (ViewBag.Suma == 0 || ViewBag.liczba == 0 || ViewBag.Suma == null || ViewBag.liczba == null)
+                                {
+                                    srednia = 0;
+                                    continue;
+                                }
+                                else
+                                {
+                                    srednia = Math.Round(ViewBag.Suma / ViewBag.liczba, 2);
+                                }
+
+                                string kolor;
+                                if (srednia <= 3.00)
+                                {
+                                    kolor = "#ff0000";
+                                }
+                                else if (srednia > 3.00 && srednia <= 4.00)
+                                {
+                                    kolor = "#f7b800";
+                                }
+                                else if (srednia > 4.00 && srednia <= 4.80)
+                                {
+                                    kolor = "#02b902";
+                                }
+                                else
+                                {
+                                    kolor = "#3dff00";
+                                }
+
+
+                            }
+
+                            @{
+
+                                    ilosc = ilosc + 1;
+                                    cala_srednia = cala_srednia + srednia;
+
+                                    double wynik = Math.Round(cala_srednia / ilosc, 2);
+                                    ViewBag.Wynik = " Średnia całej klasy wynosi: " + wynik;
+                            }
+                            <div style="line-height:60px; width:140px; margin-left:15px; float:left; height:60px; font-size:16px; font-weight:bold; color:@kolor;">Średnia ocen: @srednia</div>
+                            <br />
+
+
+
+
+
+
+                            <div class="new" style="display:none; margin-left:40px;">
+
+
+
+                                @foreach (var zmienna in Model.Where(xx => xx.StudentID2 == element.StudentID))
+                    {
+
+    
+                                        string width;
+                                        if(@zmienna.Uwagi.Trim() == "Zadanie Domowe")
+                                        {
+                                            width = "130px";
+                                        }
+                                        else if(@zmienna.Uwagi.Trim() == "Test")
+                                        {
+                                            width = "70px";
+                                        }
+                                        else {
+                                            width = "100px";
+                                        }
+
+                                    <div class="tooltip" style="height:60px; width:@width; text-align:center; float:left; display:inline-table; padding-bottom:20px;">
+                                      
+                                        <div style="height:40px; width:@width; text-align:center; line-height:40px;">@zmienna.Uwagi</div>
+                                        <div style="height:20px; width:@width; text-align:center; line-height:20px;">@zmienna.Ocena</div>
+
+                                        <span class="tooltiptext">Data wystawienia oceny <span class="dd">@zmienna.Data.ToString("dd/MM/yyyy")</span></span>
+                                    
+                                    </div>
+
+
+
+
+
+                     }
+                                
+                            </div>
+                            
+
+                        </div>
+
+
+
+
+
+
+
+                    </div>
+
+
+}
+            </div>
+
+           
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+            <script type="text/javascript">
+
+                //function myFunction() {
+                //    if ($('.show', this).text() === "+") {
+                //        $('.show', this).text("-");
+                //    } else if ($('.show', this).text() === "-") {
+                //        $('.show', this).text("+");
+
+                //    }
+
+                //};
+
+
+
+                //function myFunction() {
+                //    var x = document.getElementsByClassName("new");
+                //    var y = document.getElementsByClassName("show");
+                //    if (x[1].style.display === "none") {
+                //        x[1].style.display = "inline-table";
+                //        y[1].innerHTML = "-";
+                //    } else {
+                //        x[1].style.display = "none";
+                //        y[1].innerHTML = "+";
+                //    }
+
+
+                //}
+
+
+
+                //$(".show").click(function () {
+                //    if ($(this).text() === "+") {
+                //        $(this).html("-");
+                //        $(".new",this).css("display", "inline-table");
+                //    }
+                //    else {
+                //        $(this).html("+");
+                //        $(".new",this).css("display", "none");
+                //    }
+                //});
+
+
+                //$(".question").click(function () {
+                //    if ($(".show",this).text() === "+") {
+                //        $(".show",this).html("-");
+                //        $(".new", this).css("display", "inline-table");
+                //    }
+                //    else {
+                //        $(".show",this).html("+");
+                //        $(".new", this).css("display", "none");
+                //    }
+                //});
+
+
+
+                $(".Oceny2").click(function () {
+                    if ($(".show", this).text() === "+") {
+                        $(".show", this).html("-");
+                        
+                        $(".new", this).css("display", "inline-table");
+                        
+                    }
+                    else {
+                        $(".show", this).html("+");
+                        
+                        $(".new", this).css("display", "none");
+                        
+                    }
+                });
+
+
+
+
+    //          $('.question').on(
+    //"click",
+    //function () {
+    //  if ($('.show', this).text() === "+") {
+    //    console.log("+");
+    //    $('.name', this).addClass('open')
+    //    $('div.open + article', this).slideDown();
+    //    $('.show', this).text("-");
+    //  } else if ($('.show', this).text() === "-") {
+    //    console.log("-");
+    //    $('.name', this).removeClass('open')
+    //    $('article', this).slideUp();
+    //    $('.show', this).text("+");
+    //  }
+
+    //});
+
+
+
+            </script>
+
+            
+
+        </div>
+    
+</body>
+</html>
