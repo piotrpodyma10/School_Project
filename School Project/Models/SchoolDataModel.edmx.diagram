@@ -19,6 +19,8 @@
         </AssociationConnector>
         <AssociationConnector Association="SzkolaModel.FK_School_Grades_Teacher" />
         <AssociationConnector Association="SzkolaModel.FK_Student_User" />
+        <EntityTypeShape EntityType="SzkolaModel.Events" Width="1.5" PointX="3.875" PointY="8.625" />
+        <AssociationConnector Association="SzkolaModel.FK_Events_School_Class" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -31,5 +31,6 @@ namespace School_Project.Models
         public virtual DbSet<Teacher> Teacher { get; set; }
         public virtual DbSet<School_Grades> School_Grades { get; set; }
         public virtual DbSet<Student> Student { get; set; }
+        public virtual DbSet<Events> Events { get; set; }
     }
 }

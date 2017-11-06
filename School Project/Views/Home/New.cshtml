@@ -1,166 +1,136 @@
 ﻿@model IEnumerable<School_Project.Models.Grades>
 @using Newtonsoft.Json
 
-@{ 
-    Layout = "~/View/Main_Layout.cshtml";
+
+
+
+
+@{
+    Layout = null;
 }
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Strona Nauczyciela</title>
-    <link rel="stylesheet" href="~/Contents/Teacher/Teacher.css" type="text/css" />
-</head>
-<body>
+<h2>Index</h2>
+<div id="calender"></div>
 
-    <div id="container">
-        <div id="second_menu">
-            <a href="/Teacher/Grades">
-                <div id="Wprowadzanie_ocen">
-                    <div id="icon1"><i class="icon-graduation-cap"></i></div><div id="text1">Wprowadzanie ocen</div>
-
-                </div>
-            </a>
-            <a href="/Teacher/Grades_View">
-                <div id="Przegląd_Ocen">
-                    <div id="icon1"><i class="icon-chart-bar-1"></i></div><div id="text1">Przeglądanie ocen</div>
-                </div>
-            </a>
-
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><span id="eventTitle"></span></h4>
+            </div>
+            <div class="modal-body">
+                <button id="btnDelete" class="btn btn-default btn-sm pull-right">
+                    <span class="glyphicon glyphicon-remove"></span> Remove
+                </button>
+                <button id="btnEdit" class="btn btn-default btn-sm pull-right" style="margin-right:5px;">
+                    <span class="glyphicon glyphicon-pencil"></span> Edit
+                </button>
+                <p id="pDetails"></p>
+                <p id="pClassID"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
         </div>
-        <div id="container_of_calendar">
+    </div>
+</div>
 
-            <div id="background_of_calender">
-                <div id="calender"></div>
-
+<div id="myModalSave" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Zapisz wydarzenie</h4>
             </div>
-
-            <div id="myModal" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title"><span id="eventTitle"></span></h4>
-                        </div>
-                        <div class="modal-body">
-                            <button id="btnDelete" class="btn btn-default btn-sm pull-right">
-                                <span class="glyphicon glyphicon-remove"></span> Usuń
-                            </button>
-                            <button id="btnEdit" class="btn btn-default btn-sm pull-right" style="margin-right:5px;">
-                                <span class="glyphicon glyphicon-pencil"></span> Edytuj
-                            </button>
-                            <p id="pDetails"></p>
-                            <p id="pClassID"></p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
+            <div class="modal-body">
+                <form class="col-md-12 form-horizontal">
+                    <input type="hidden" id="hdEventID" value="0" />
+                    <div class="form-group">
+                        <label>Nagłówek</label>
+                        <input type="text" id="txtSubject" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Początek</label>
+                        <div class="input-group date" id="dtp1">
+                            <input type="text" id="txtStart" class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div id="myModalSave" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Zapisz wydarzenie</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form class="col-md-12 form-horizontal">
-                                <input type="hidden" id="hdEventID" value="0" />
-                                <div class="form-group">
-                                    <label>Nagłówek</label>
-                                    <input type="text" id="txtSubject" class="form-control" />
-                                </div>
-                                <div class="form-group">
-                                    <label>Początek</label>
-                                    <div class="input-group date" id="dtp1">
-                                        <input type="text" id="txtStart" class="form-control" />
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" id="chkIsFullDay" checked="checked" />  Wydarzenie trwa cały dzień</label>
-                                    </div>
-                                </div>
-                                <div class="form-group" id="divEndDate" style="display:none">
-                                    <label>Koniec</label>
-                                    <div class="input-group date" id="dtp2">
-                                        <input type="text" id="txtEnd" class="form-control" />
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Opis</label>
-                                    <textarea id="txtDescription" rows="3" class="form-control"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label>Kolor wydarzenia</label>
-                                    <select id="ddThemeColor" class="form-control">
-                                        <option value="">Domyślny</option>
-                                        <option value="#c70303">Czerwony</option>
-                                        <option value="#016077">Niebieski</option>
-                                        <option value="black">Czarny</option>
-                                        <option value="green">Zielony</option>
-                                        <option value="#8a0479">Fioletowy</option>
-                                        <option value="#5a5959">Szary</option>
-                                        <option value="#d48600">Pomarańczowy</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Klasy</label>
-                                    <select id="ddClassID" class="form-control">
-                                        @foreach (var item in Model)
-                                        {
-                                            <option value="@Html.DisplayName(item.ClassID.ToString())">@Html.DisplayName(item.Nazwa_Klasy)</option>
-                                        }
-
-                                    </select>
-                                </div>
-                                <button type="button" id="btnSave" class="btn btn-success">Zapisz</button>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
-                            </form>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label><input type="checkbox" id="chkIsFullDay" checked="checked" />  Wydarzenie trwa cały dzień</label>
                         </div>
                     </div>
-                </div>
+                    <div class="form-group" id="divEndDate" style="display:none">
+                        <label>Koniec</label>
+                        <div class="input-group date" id="dtp2">
+                            <input type="text" id="txtEnd" class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Opis</label>
+                        <textarea id="txtDescription" rows="3" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Kolor wydarzenia</label>
+                        <select id="ddThemeColor" class="form-control">
+                            <option value="">Default</option>
+                            <option value="red">Red</option>
+                            <option value="blue">Blue</option>
+                            <option value="black">Black</option>
+                            <option value="green">Green</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Klasy</label>
+                        <select id="ddClassID" class="form-control">
+                            @foreach (var item in Model)
+                            {
+                                <option value="@Html.DisplayName(item.ClassID.ToString())">@Html.DisplayName(item.Nazwa_Klasy)</option>
+                            }
+                           
+                        </select>
+                    </div>
+                    <button type="button" id="btnSave" class="btn btn-success">Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </form>
             </div>
+        </div>
+    </div>
+</div>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.6.1/fullcalendar.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.6.1/fullcalendar.print.css" rel="stylesheet" media="print" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
 
 
 
-            <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.6.1/fullcalendar.min.css" rel="stylesheet" />
-            <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.6.1/fullcalendar.print.css" rel="stylesheet" media="print" />
-            <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+<script src="~/Contents/Others/date.js"></script>
 
 
 
-            <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Scripts/modernizr-2.6.2.js"></script>
 
-            
-
-
-
-            <script src="~/Scripts/modernizr-2.6.2.js"></script>
-
-            <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
 
-            <script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
 
-            @*<script src="https://momentjs.com/downloads/moment.js"></script>*@
-            <script src="~/Contents/Others/moment.min.js"></script>
+<script src="https://momentjs.com/downloads/moment.js"></script>
 
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.6.1/fullcalendar.min.js"></script>
-            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.6.1/fullcalendar.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 
-            <script src="~/Contents/Others/pl.js"></script>
-            <script>
+<script src="~/Contents/Others/pl.js"></script>
+<script>
     $(document).ready(function () {
         var events = [];
         var selectedEvent = null;
@@ -169,7 +139,7 @@
             events = [];
             $.ajax({
                 type: "GET",
-                url: "/Teacher/GetEvents",
+                url: "/home/GetEvents",
                 success: function (data) {
                     $.each(data, function (i, v) {
                         events.push({
@@ -205,22 +175,21 @@
                 },
                 eventLimit: true,
                 eventColor: '#378006',
-                
                 events: events,
                 eventClick: function (calEvent, jsEvent, view) {
                     selectedEvent = calEvent;
                     $('#myModal #eventTitle').text(calEvent.title);
                     var $description = $('<div/>');
-                    $description.append($('<p/>').html('<b>Początek: </b>' + calEvent.start.format("DD-MM-YYYY HH:mm")));
+                    $description.append($('<p/>').html('<b>Start:</b>' + calEvent.start.format("DD-MM-YYYY HH:mm")));
                     if (calEvent.end != null) {
-                        $description.append($('<p/>').html('<b>Koniec: </b>' + calEvent.end.format("DD-MM-YYYY HH:mm")));
+                        $description.append($('<p/>').html('<b>End:</b>' + calEvent.end.format("DD-MM-YYYY HH:mm")));
                     }
 
                     if (calEvent.description === 'null' || calEvent.description === null) {
-                        $description.append($('<p/>').html('<b>Opis wydarzenia: </b>' + 'Brak'));
+                        $description.append($('<p/>').html('<b>Description: </b>' + 'Brak'));
                     }
                     else {
-                        $description.append($('<p/>').html('<b>Opis wydarzenia: </b>' + calEvent.description));
+                        $description.append($('<p/>').html('<b>Description: </b>' + calEvent.description));
                     }
 
 
@@ -231,7 +200,7 @@
                     var modelArray = @Html.Raw(JsonConvert.SerializeObject(Model));
                     var Klasa = calEvent.ClassID;
 
-
+                   
                     for (var i = 0; i < modelArray.length; i++) {
                         var obj = modelArray[i];
                         if (obj.ClassID === Klasa) {
@@ -239,10 +208,10 @@
                         }
                     }
 
-
+           
                     $description.append($('<p/>').html('<b>Klasa: </b>' + NameOfClass));
-
-
+                    
+                                                          
                     $('#myModal').modal();
                             },
                 selectable: true,
@@ -392,13 +361,5 @@
             })
         }
     })
-            </script>
-
-
-
-
-        </div>
-
-</div>
-</body>
-</html>
+</script>
+}

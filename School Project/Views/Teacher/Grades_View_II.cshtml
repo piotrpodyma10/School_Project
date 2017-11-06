@@ -33,7 +33,7 @@
             width: 120px;
             height: 48px;
             color: white;
-            position: fixed;
+            position: absolute;
             line-height: 50px;
             transition: 1s;
             background-color: rgb(2, 62, 51);
@@ -355,54 +355,11 @@
                     </div>
                 </a>
 
-                @{
-             double cala_srednia0 = 0;
-             int ilosc0 = 0;
-             double srednia0 = 0;
-
-                }
-            @foreach (var element0 in ViewBag.Zaciaganie)
-            {
-                int liczba0 = 0;
-                double suma = 5;
-                suma = 0;
-
-                foreach( var zmienna3 in Model.Where(xx => xx.StudentID2 == element0.StudentID))
-                {
-
-                    ++liczba0;
-                    ViewBag.liczba0 = liczba0;
-
-
-
-                    suma = suma + zmienna3.Ocena;
-
-
-                    ViewBag.Suma0 = suma;
-
-                }
-                ilosc0 = ilosc0 + 1;
-
-                if (ViewBag.Suma0 == null || ViewBag.liczba0 == null)
-                {
-                    continue;
-                }
-                else
-                {
-                    srednia0 = Math.Round(ViewBag.Suma0 / ViewBag.liczba0, 2);
-                    cala_srednia0 = cala_srednia0 + srednia0;
-
-                    double wynik = Math.Round(cala_srednia0 / ilosc0, 2);
-                    ViewBag.Wynik0 = " Średnia całej klasy wynosi: " + wynik;
-                }
-            }
-                @if (ViewBag.Suma0 == null)
-                {
-                    ViewBag.Wynik0 = "Brak Ocen";
-                }
+             
+               
                 <div style="margin-left:120px; font-size:18px; font-weight:bold; line-height:50px; height:50px; background-color: rgb(2, 62, 51); width:482px; text-align:center; float:left;">
                     <i class="icon-chart-bar-1" style="text-align:right; position:relative; top:10px; left:90px; padding-right:15px; float:left;"></i>
-                    <div style="text-align:center; border:solid 2px white;">@ViewBag.Wynik0</div>
+                    <div style="text-align:center; border:solid 2px white;">@ViewBag.Wynik50</div>
                 </div>
 
             </div>
@@ -442,8 +399,7 @@
                 </div>
 
                 @{
-             double cala_srednia = 0;
-             int ilosc = 0;
+             
              double srednia = 0;
 
                 }
@@ -484,14 +440,15 @@
                 }
 
                             @{
-                                if (ViewBag.Suma == 0 || ViewBag.liczba == 0 || ViewBag.Suma == null || ViewBag.liczba == null)
+                                if (liczba == 0)
                                 {
                                     srednia = 0;
-                                    continue;
+                                    ViewBag.Srednia = "Brak ocen";
                                 }
                                 else
                                 {
                                     srednia = Math.Round(ViewBag.Suma / ViewBag.liczba, 2);
+                                    ViewBag.Srednia = "Średnia ocen: " + srednia;
                                 }
 
                                 string kolor;
@@ -513,17 +470,15 @@
                                 }
 
 
+                                if (srednia == 0)
+                                {
+                                    kolor = "#ffffff";
+                                }
+
                             }
 
-                            @{
-
-                                    ilosc = ilosc + 1;
-                                    cala_srednia = cala_srednia + srednia;
-
-                                    double wynik = Math.Round(cala_srednia / ilosc, 2);
-                                    ViewBag.Wynik = " Średnia całej klasy wynosi: " + wynik;
-                            }
-                            <div style="line-height:60px; width:140px; margin-left:15px; float:left; height:60px; font-size:16px; font-weight:bold; color:@kolor;">Średnia ocen: @srednia</div>
+                           
+                            <div style="line-height:60px; width:140px; margin-left:15px; float:left; height:60px; font-size:16px; font-weight:bold; color:@kolor;">@ViewBag.Srednia</div>
                             <br />
 
 

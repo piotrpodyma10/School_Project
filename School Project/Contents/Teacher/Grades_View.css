@@ -1,0 +1,135 @@
+﻿body {
+    background-image: url("../../Contents/img/1.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #999;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 15px;
+    color: white;
+}
+
+
+input[type='radio']:before {
+    content: '';
+    display: block;
+    width: inherit;
+    height: inherit;
+}
+
+input[type='radio']:checked:before {
+    background: green;
+    color: blue;
+}
+
+
+
+
+#Klasa {
+    position: relative;
+    text-align: center;
+    width: 100px;
+    height: 60px;
+    box-sizing: border-box;
+    background-color: white;
+    float: left;
+    text-align: center;
+    margin-right: 15px;
+    color: black;
+    margin-top: 15px;
+    /*border:solid 2px black;
+            border:4px outset green;*/
+}
+
+    #Klasa:hover {
+        background-color: lawngreen;
+    }
+
+input[type=submit] {
+    width: 150px;
+    background-color: saddlebrown;
+    font-size: 20px;
+    color: white;
+    padding: 15px 10px;
+    margin-top: 15px;
+    border: solid 2px white;
+    cursor: pointer;
+    letter-spacing: 2px;
+    box-sizing: border-box;
+    height: 60px;
+    transition: 1s;
+}
+
+
+    input[type=submit]:focus {
+        -webkit-box-shadow: 0px 0px 12px 4px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0px 0px 12px 4px rgba(0,0,0,0.75);
+        box-shadow: 0px 0px 12px 4px rgba(0,0,0,0.75);
+    }
+
+
+
+    input[type=submit]:hover {
+        background-color: green;
+        transition: 1s;
+    }
+
+
+input {
+    /*display:none;*/
+    width: inherit;
+    height: inherit;
+    margin: 0px;
+    -webkit-appearance: textarea;
+    cursor: pointer;
+}
+
+label {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    top: 50%; /* position the top  edge of the element at the middle of the parent */
+    left: 50%; /* position the left edge of the element at the middle of the parent */
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.input-check:checked + .label-check {
+    color: white;
+}
+
+
+canvas {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+#container {
+    height: 440px;
+    margin-left: 140px;
+    background-color: rgba(0, 96, 111, 0.6);
+    border:solid 2.5px white;
+}
+
+#canvas {
+    height:420px !important;
+}
+
+
+#full_container {
+    padding-top:15px;
+    /*margin-top: 15px;*/
+    background-color: rgba(20, 99, 94, 0.6);
+    padding-bottom:15px;
+}
+
+#Main_Text {
+    font-size:20px;
+    font-weight:bold;
+    color:white;
+}

@@ -29,12 +29,15 @@
         #Oceny {
            
         }
-
+        table {
+            min-height:40px;
+        }
 
         #Oceny2 {
             background-color: rgba(111,66,1,0.7);
             width: inherit;
             transition: 2s;
+            min-height:74px;
         }
 
             #Oceny2:hover {
@@ -192,11 +195,7 @@
             
             <div>
                 
-                    @{ 
-                        double srednia = 0;
-                        int ilosc = 0;
-                        double suma = 0;
-                    }   
+                   
 
                     @foreach (var zmienna in ViewBag.Przedmioty)
                     {
@@ -206,11 +205,31 @@
                                 <tr></tr>
                             </table>
                             <table>
+
+                                @{
+                                    double srednia = 0;
+                                    int ilosc = 0;
+                                    double suma = 0;
+                                }
+
+                                
+
                                 @foreach (var zmienna2 in Model.Where(xx => xx.Przedmiot == @zmienna.przedmiot2))
                                 {
-
-
-                                    <td width="100px" style="text-align:center;">@zmienna2.Uwagi<table><td width="100px" style="text-align:center;">@zmienna2.Ocena</td></table></td>
+                                    string width;
+                                    if(@zmienna2.Uwagi.Trim() == "Zadanie Domowe")
+                                    {
+                                        width = "130px";
+                                    }
+                                    else if(@zmienna2.Uwagi.Trim() == "Test")
+                                    {
+                                        width = "70px";
+                                    }
+                                    else
+                                    {
+                                        width = "100px";
+                                    }
+                                    <td width=@width style="text-align:center;">@zmienna2.Uwagi<table><td width="100px" style="text-align:center;">@zmienna2.Ocena</td></table></td>
 
                                     ++ilosc;
                                     ViewBag.Ilosc = ilosc;
@@ -223,14 +242,15 @@
                                 }
 
                                 @{
-                                    if (ViewBag.Suma == 0 || ViewBag.Ilosc == 0 || ViewBag.Suma == null || ViewBag.Ilosc == null)
+                                    if (ilosc == 0 )
                                     {
                                         srednia = 0;
-                                        continue;
+                                        ViewBag.Srednia = "    Brak ocen";
                                     }
                                     else
                                     {
                                         srednia = Math.Round(ViewBag.Suma / ViewBag.Ilosc, 2);
+                                        ViewBag.Srednia = "Średnia ocen: " + srednia;
                                     }
 
 
@@ -252,9 +272,14 @@
                                         kolor = "#3dff00";
                                     }
 
+                                    if (srednia == 0)
+                                    {
+                                        kolor = "white";
+                                    }
+
                                 }
 
-                                <td width="160px" style="font-size:16px; font-weight:bold; color:@kolor;">Średnia ocen: @srednia</td>
+                                <td width="160px" style="font-size:16px; font-weight:bold; color:@kolor;">@ViewBag.Srednia</td>
 
                             </table>
                         </div>

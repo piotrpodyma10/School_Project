@@ -1,0 +1,255 @@
+﻿
+
+
+<!doctype html>
+<html>
+<head>
+    <title>Horizontal Bar Chart</title>
+    
+
+    <script src="~/Contents/Others/Chart/Chart.bundle.js"></script>
+    <script src="~/Contents/Others/Chart/utils.js"></script>
+    <style>
+        canvas {
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+
+        }
+
+        input[type='radio']:before {
+            content: '';
+            display: block;
+            width: inherit;
+            height: inherit;
+        }
+
+        input[type='radio']:checked:before {
+            background: green;
+            color: blue;
+        }
+
+
+
+
+        #Klasa {
+            position: relative;
+            text-align: center;
+            width: 100px;
+            height: 60px;
+            box-sizing: border-box;
+            background-color: white;
+            float: left;
+            text-align: center;
+            margin-right: 15px;
+            color: black;
+            margin-top: 15px;
+            /*border:solid 2px black;
+            border:4px outset green;*/
+        }
+
+            #Klasa:hover {
+                background-color: lawngreen;
+            }
+
+        input[type=submit] {
+            width: 150px;
+            background-color: saddlebrown;
+            font-size: 20px;
+            color: white;
+            padding: 15px 10px;
+            margin-top: 15px;
+            border: solid 2px white;
+            cursor: pointer;
+            letter-spacing: 2px;
+            box-sizing: border-box;
+            height: 60px;
+            transition: 1s;
+        }
+
+
+            input[type=submit]:focus {
+                -webkit-box-shadow: 0px 0px 12px 4px rgba(0,0,0,0.75);
+                -moz-box-shadow: 0px 0px 12px 4px rgba(0,0,0,0.75);
+                box-shadow: 0px 0px 12px 4px rgba(0,0,0,0.75);
+            }
+
+
+
+            input[type=submit]:hover {
+                background-color: green;
+                transition: 1s;
+            }
+
+
+        input {
+            /*display:none;*/
+            width: inherit;
+            height: inherit;
+            margin: 0px;
+            -webkit-appearance: textarea;
+            cursor: pointer;
+        }
+
+        label {
+            position: absolute;
+            margin-left: auto;
+            margin-right: auto;
+            top: 50%; /* position the top  edge of the element at the middle of the parent */
+            left: 50%; /* position the left edge of the element at the middle of the parent */
+            transform: translate(-50%, -50%);
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .input-check:checked + .label-check {
+            color: white;
+        }
+
+
+
+
+
+    </style>
+</head>
+<body>
+    <div id="container" style="width: 75%;">
+        <canvas id="canvas"></canvas>
+    </div>
+  
+
+
+    <div>
+        <form action="/Teacher/Grades_View_I" method="post">
+            @foreach (var item in ViewBag.Klasy)
+            {
+
+                <div id="Klasa">
+                    <input type="radio" class="input-check" name="ClassID" value="@item.ClassID.ToString().Trim()">
+                    <label class="label-check">@item.Nazwa_Klasy</label>
+
+                </div>
+
+            }
+            <input type="submit" value="Wybierz" />
+        </form>
+    </div>
+
+
+
+
+
+    <script>
+        var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        var color = Chart.helpers.color;
+        var horizontalBarChartData = {
+            labels: ["I A", "I B", "I C", "I D"],
+            datasets: [{
+                label: 'Język Angielski',
+                backgroundColor: '#84ff62',
+                borderColor: window.chartColors.black,
+                borderWidth: 1,
+                data: [
+
+                    
+                    @foreach(var test2 in ViewBag.Ang)
+                    {
+                        @test2
+                    }
+                ]
+            }, {
+                label: 'Język Polski',
+                backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+                borderColor: window.chartColors.black,
+                data: [
+                   4.2,4.4,4.2,5.0
+                ]
+            },
+			{
+                label: 'Chemia',
+                backgroundColor: color(window.chartColors.yellow).alpha(0.5).rgbString(),
+                borderColor: window.chartColors.black,
+                data: [
+                    
+                        4.2,5.2,2.9,4.0
+                    
+                ]
+            },{
+				label:'Matematyka',
+				backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+				borderColor: window.chartColors.black,
+				data: [
+					 @foreach(var dd in ViewBag.Matma)
+                    {
+                       @dd
+                    }
+				]
+				}
+]
+        };
+
+
+		Chart.pluginService.register({
+    beforeDraw: function (chart, easing) {
+        if (chart.config.options.chartArea && chart.config.options.chartArea.backgroundColor) {
+            var helpers = Chart.helpers;
+            var ctx = chart.chart.ctx;
+            var chartArea = chart.chartArea;
+
+            ctx.save();
+            ctx.fillStyle = chart.config.options.chartArea.backgroundColor;
+            ctx.fillRect(chartArea.left, chartArea.top, chartArea.right - chartArea.left, chartArea.bottom - chartArea.top);
+            ctx.restore();
+        }
+    }
+});
+
+        window.onload = function() {
+            var ctx = document.getElementById("canvas").getContext("2d");
+            window.myHorizontalBar = new Chart(ctx, {
+                type: 'horizontalBar',
+                data: horizontalBarChartData,
+                options: {
+                    // Elements options apply to all of the options unless overridden in a dataset
+                    // In this case, we are setting the border of each horizontal bar to be 2px wide
+                    scales: {
+                        xAxes: [{
+                            ticks: {
+                                beginAtZero: true
+
+                                //beginAtZero: true,
+                                //steps: 10,
+                                //stepValue: 5,
+                                //max: 100
+                            }
+                        }]
+                    },
+                    elements: {
+                        rectangle: {
+                            borderWidth: 4,
+                        }
+                    },
+                    responsive: true,
+					chartArea: {
+					backgroundColor: 'black' },
+                    legend: {
+                        position: 'right',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Testowanie'
+                    }
+                }
+            });
+
+        };
+
+
+
+
+
+
+    </script>
+</body>
+</html>

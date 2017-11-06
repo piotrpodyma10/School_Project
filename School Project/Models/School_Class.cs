@@ -19,6 +19,7 @@ namespace School_Project.Models
         {
             this.Teacher = new HashSet<Teacher>();
             this.Student = new HashSet<Student>();
+            this.Events = new HashSet<Events>();
         }
     
         public int ClassID { get; set; }
@@ -28,5 +29,7 @@ namespace School_Project.Models
         public virtual ICollection<Teacher> Teacher { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Student> Student { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Events> Events { get; set; }
     }
 }

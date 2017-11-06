@@ -53,6 +53,9 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -99,6 +102,8 @@
     <Content Include="Contents\Login\Login.css" />
     <Content Include="Contents\Main_Layout\Layout.css" />
     <Content Include="Contents\Others\Personal_Data.css" />
+    <Content Include="Contents\Student\Student.css" />
+    <Content Include="Contents\Teacher\Grades_View.css" />
     <Content Include="Contents\Teacher\Teacher.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -125,6 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
@@ -133,6 +139,9 @@
     </Compile>
     <Compile Include="Models\Data.cs" />
     <Compile Include="Models\DataGradesModel.cs" />
+    <Compile Include="Models\Events.cs">
+      <DependentUpon>SchoolDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Grades.cs" />
     <Compile Include="Models\Personal_Data.cs">
       <DependentUpon>SchoolDataModel.tt</DependentUpon>
@@ -193,6 +202,9 @@
     <Content Include="Views\Teacher\Grades_View_II.cshtml" />
     <Content Include="Views\Student\Index_Student.cshtml" />
     <Content Include="Views\Student\Student_Grades.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Test.cshtml" />
+    <Content Include="Views\Home\New.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

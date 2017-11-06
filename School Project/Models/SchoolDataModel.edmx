@@ -5,6 +5,19 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="SzkolaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClassID" Type="int" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="300" />
+          <Property Name="Start" Type="datetime" Nullable="false" />
+          <Property Name="End" Type="datetime" />
+          <Property Name="ThemeColor" Type="nchar" MaxLength="10" />
+          <Property Name="IsFullDay" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="Personal_Data">
           <Key>
             <PropertyRef Name="Pesel" />
@@ -63,6 +76,18 @@
           <Property Name="Nazwisko" Type="char" MaxLength="30" />
           <Property Name="Rodzaj" Type="char" MaxLength="30" />
         </EntityType>
+        <Association Name="FK_Events_School_Class">
+          <End Role="School_Class" Type="Self.School_Class" Multiplicity="1" />
+          <End Role="Events" Type="Self.Events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School_Class">
+              <PropertyRef Name="ClassID" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Personal_Data_User">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="Personal_Data" Type="Self.Personal_Data" Multiplicity="*" />
@@ -148,12 +173,17 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="SzkolaModelStoreContainer">
+          <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Personal_Data" EntityType="Self.Personal_Data" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="School_Class" EntityType="Self.School_Class" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="School_Grades" EntityType="Self.School_Grades" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Events_School_Class" Association="Self.FK_Events_School_Class">
+            <End Role="School_Class" EntitySet="School_Class" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
           <AssociationSet Name="FK_Personal_Data_User" Association="Self.FK_Personal_Data_User">
             <End Role="User" EntitySet="User" />
             <End Role="Personal_Data" EntitySet="Personal_Data" />
@@ -236,6 +266,11 @@
             <End Role="User" EntitySet="User" />
             <End Role="Student" EntitySet="Student" />
           </AssociationSet>
+          <EntitySet Name="Events" EntityType="SzkolaModel.Events" />
+          <AssociationSet Name="FK_Events_School_Class" Association="SzkolaModel.FK_Events_School_Class">
+            <End Role="School_Class" EntitySet="School_Class" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Personal_Data">
           <Key>
@@ -270,6 +305,7 @@
           <Property Name="Nazwa" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Teacher" Relationship="SzkolaModel.FK_Teacher_School_Class" FromRole="School_Class" ToRole="Teacher" />
           <NavigationProperty Name="Student" Relationship="SzkolaModel.FK_Student_School_Class" FromRole="School_Class" ToRole="Student" />
+          <NavigationProperty Name="Events" Relationship="SzkolaModel.FK_Events_School_Class" FromRole="School_Class" ToRole="Events" />
         </EntityType>
         <EntityType Name="Teacher">
           <Key>
@@ -379,6 +415,32 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassID" Type="Int32" Nullable="false" />
+          <Property Name="Subject" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Start" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="End" Type="DateTime" Precision="3" />
+          <Property Name="ThemeColor" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="IsFullDay" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="School_Class" Relationship="SzkolaModel.FK_Events_School_Class" FromRole="Events" ToRole="School_Class" />
+        </EntityType>
+        <Association Name="FK_Events_School_Class">
+          <End Type="SzkolaModel.School_Class" Role="School_Class" Multiplicity="1" />
+          <End Type="SzkolaModel.Events" Role="Events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School_Class">
+              <PropertyRef Name="ClassID" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -446,6 +508,20 @@
                 <ScalarProperty Name="ClassID" ColumnName="ClassID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="SzkolaModel.Events">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="IsFullDay" ColumnName="IsFullDay" />
+                <ScalarProperty Name="ThemeColor" ColumnName="ThemeColor" />
+                <ScalarProperty Name="End" ColumnName="End" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

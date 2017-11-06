@@ -1,0 +1,253 @@
+﻿
+
+body {
+    background-image: url("../../Contents/img/5782.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: burlywood !important;
+    width: 100%;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 15px;
+    position: relative;
+}
+
+#Container {
+    width: 1000px;
+    margin: auto;
+    height: 500px;
+    
+    margin-left: 180px;
+}
+
+@media only screen and (min-height:770px) {
+    #Container {
+        margin-left: 0px !important;
+        width:1100px !important;
+        margin-top:120px !important;
+    }
+
+     #Second_Menu { 
+         margin-top: 40px !important;
+     }
+
+      #container_of_calendar {
+          width: 800px !important;
+      }
+
+       #calender {
+           width: 700px !important;
+           margin-left:50px !important;
+           margin-right:0px !important;
+       }
+}
+
+
+#Second_Menu {
+    width: 220px;
+    float: left;
+    height: inherit;
+    margin-top:78px;
+}
+
+#Oceny {
+    width: inherit;
+    height: 100px;
+    background-color: none;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 100px;
+    text-align: center;
+    font-size: 30px;
+    font-family: 'Gloria Hallelujah', cursive;
+    text-shadow: 4px 4px 3px rgba(0,0,0,0.1);
+    transition: 2s;
+}
+
+
+    #Oceny:hover {
+        background-color: lawngreen;
+        color: black;
+        transition: 2s;
+    }
+
+
+@@media screen and (min-width:1400px) {
+    body {
+        background-color: darkgoldenrod;
+    }
+
+    #Container {
+        margin-top: 9.5%;
+    }
+}
+
+#icon-grades {
+    margin-top: 40px;
+    padding-right: 10px;
+}
+
+
+
+
+
+
+#container_of_calendar {
+    float: left;
+    width: 700px;
+    height: 520px;
+    margin-top:3.5px;
+    margin-right: 15px;
+}
+
+#calender {
+    width: 600px;
+    
+    float: right;
+    margin-top:85px;
+    margin-right:60px;
+}
+
+#background_of_calender {
+    width: inherit;
+    height: inherit;
+    background: #58a;
+    background: linear-gradient(135deg, transparent 15px, rgba(85, 136, 170, 0.5) 0) top left, linear-gradient(-135deg, transparent 15px, rgba(102, 85, 85, 0.5) 0) top right, linear-gradient(-45deg, transparent 15px, rgba(85, 136, 170, 0.5) 0) bottom right, linear-gradient(45deg, transparent 15px, rgba(102, 85, 85, 0.5) 0) bottom left;
+    background-repeat: no-repeat;
+    background-size: 50% 50%;
+}
+
+.fc td, .fc th {
+    color: white;
+    border-width: 2px !important;
+    border-color: white !important;
+}
+
+
+
+
+.fc-center {
+    color: white;
+}
+
+.fc-icon, .fc-toolbar {
+    color: black;
+}
+
+.fc-unthemed td.fc-today {
+    background: #0a3831 !important;
+    color: #ffbe00 !important;
+    font-weight: bold !important;
+}
+
+a {
+    color: white !important;
+    outline:none;
+}
+
+.fc-event {
+    border-color: white !important;
+}
+
+
+.fc-toolbar, .fc-header-toolbar {
+   
+}
+
+.fc-toolbar.fc-header-toolbar {
+    margin-bottom: 5px !important;
+}
+
+h2 {
+    font-family: 'Gloria Hallelujah', cursive !important;
+    text-shadow: 4px 4px 3px rgba(0,0,0,0.1) !important;
+    font-size:28px !important;
+}
+
+
+.fc-state-active, .fc-state-disabled, .fc-state-down, .fc-state-hover {
+    color: #fbfbfb !important;
+    background-color: #029c0c !important;
+}
+
+
+.fc-state-default {
+    background-image: linear-gradient(#027b29,#06c104) !important;
+    color: white !important;
+    border-color: white white white !important;
+    
+    text-shadow: 0 1px 1px white !important;
+    box-shadow: inset 0 1px 0 white, 0 1px 2px white !important;
+}
+
+.fc button .fc-icon {
+    color: white !important;
+}
+
+.fc-state-active, .fc-state-disabled, .fc-state-down, .fc-state-hover {
+    /*border-color: #cccccc !important;*/
+    opacity:0.6 !important;
+}
+
+
+
+.modal-dialog {
+    padding-top: 10px !important;
+}
+
+.fc-event .fc-content {
+   
+    cursor: pointer !important;
+}
+
+.modal-content {
+    background-color: #02b527 !important;
+    color:white !important;
+    font-size:18px !important;
+}
+
+.modal-footer {
+
+    border-top: 4px solid #f9f9f9 !important;
+}
+
+
+.modal-header {
+    border-bottom: 4px solid #e5e5e5 !important;
+
+}
+
+.btn-default:hover {
+    background-color:gold !important;
+    border:solid 2px black !important;
+    color:black !important;
+    transition:2s;
+    
+}
+
+.btn-default {
+   
+    transition: 2s;
+}
+
+#eventTitle {
+    font-size: 24px !important;
+    font-weight: bold !important;
+}
+
+.hover-end {
+    padding: 0;
+    margin: 0;
+    background-color:blue;
+    text-align: center;
+    position: fixed;
+    bottom: 50%;
+    width: 200px;
+    opacity: 0.8;
+    font-size:18px;
+    color:greenyellow;
+    right:70%;
+    color:white;
+}

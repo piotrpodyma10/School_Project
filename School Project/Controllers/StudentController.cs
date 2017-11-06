@@ -25,8 +25,46 @@ namespace School_Project.Controllers
 
 
 
+            
+
+            
+
+
+
+
+
+
             return View("Index_Student", "~/Views/Main_Layout.cshtml");
         }
+
+
+
+
+
+        public JsonResult GetEvents()
+        {
+
+            using (SzkolaEntities School = new SzkolaEntities())
+            {
+                School.Configuration.LazyLoadingEnabled = false;
+
+                LoginController Log = new LoginController();
+                int ID;
+                Log.wyciaganie_ID(out ID);
+
+                var result = (from n in School.Student
+                               where n.UserID == ID
+                                select n.ClassID).Single();
+
+                var result2 = Convert.ToInt32(result);
+
+                var events = School.Events.ToList().Where(xx => xx.ClassID == result2);
+                return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            }
+
+        }
+
+
 
 
         public ActionResult Student_Grades()
