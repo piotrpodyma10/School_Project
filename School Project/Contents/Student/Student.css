@@ -11,7 +11,7 @@ body {
     margin-left: 0px;
     margin-right: 0px;
     margin-top: 15px;
-    position: relative;
+    position: fixed;
 }
 
 #Container {
@@ -29,9 +29,10 @@ body {
         margin-top:120px !important;
     }
 
-     #Second_Menu { 
-         margin-top: 40px !important;
-     }
+    #Second_Menu {
+        margin-top: 60px !important;
+        
+    }
 
       #container_of_calendar {
           width: 800px !important;
@@ -43,6 +44,77 @@ body {
            margin-right:0px !important;
        }
 }
+
+
+
+@media only screen and (min-width:1080px) {
+    #Container {
+        margin-left: 200px !important;
+        width: 1100px !important;
+        margin-top: 60px !important;
+    }
+
+    #Second_Menu {
+        margin-top: 40px !important;
+    }
+
+    #container_of_calendar {
+        width: 800px !important;
+    }
+
+    #calender {
+        width: 700px !important;
+        margin-top: 60px !important;
+        margin-right: 20px !important;
+       
+    }
+}
+
+
+
+
+
+@media only screen and (min-width:750px) and (max-width:1070px) {
+    #powitanie {
+        text-align: center !important;
+        line-height: 30px !important;
+        margin-top: 25px !important;
+    }
+
+    #dane_tekst {
+        line-height: 25px !important;
+    }
+
+    #wylog_tekst {
+        line-height: 25px;
+    }
+
+
+    #Second_Menu {
+        height: 120px !important;
+        margin-top:50px !important;
+        width:75px !important;
+
+    }
+
+    #Container {
+        margin-left:10px !important;
+    }
+    #Oceny {
+        line-height:35px !important;
+        margin-top:30px !important;
+    }
+    #calender {
+        margin-top:60px !important;
+        margin-right:20px !important;
+    }
+
+}
+
+
+
+
+
 
 
 #Second_Menu {

@@ -116,7 +116,7 @@
             function GenerateCalender(events) {
                 $('#calender').fullCalendar('destroy');
                 $('#calender').fullCalendar({
-                    contentHeight: 360,
+                    contentHeight: 380,
                     defaultDate: new Date(),
                     timeFormat: 'h(:mm)a',
                     header: {
@@ -126,15 +126,15 @@
                     },
                     eventLimit: true,
                     eventColor: '#378006',
-                    eventMouseover: function (calEvent, jsEvent, view) {
-                        $('.fc-content', this).append('<div id=\"' + calEvent.eventID + '\" class=\"hover-end\">' + $.fullCalendar.title + calEvent.title + calEvent.description + '</div>');
+                    //eventMouseover: function (calEvent, jsEvent, view) {
+                    //    $('.fc-content', this).append('<div id=\"' + calEvent.eventID + '\" class=\"hover-end\">' + $.fullCalendar.title + calEvent.title + calEvent.description + '</div>');
 
 
 
-                    },
-                    eventMouseout: function (calEvent, jsEvent, view) {
-                        $('#' + calEvent.eventID).remove();
-                    },
+                    //},
+                    //eventMouseout: function (calEvent, jsEvent, view) {
+                    //    $('#' + calEvent.eventID).remove();
+                    //},
                     events: events,
                     eventClick: function (calEvent, jsEvent, view) {
                         selectedEvent = calEvent;

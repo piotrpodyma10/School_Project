@@ -19,7 +19,8 @@
 }
 
 #Wprowadzanie_ocen,
-#Przegląd_Ocen {
+#Przegląd_Ocen,
+#Ranking_Uczniow {
     background-color: rgba(46, 46, 31, 0.7);
     width: 200px;
     text-align: center;
@@ -37,13 +38,32 @@
     transition: 2s;
 }
 
+#Ranking_Uczniow {
+  
+}
+
+
+
 #Wprowadzanie_ocen:hover,
-#Przegląd_Ocen:hover {
+#Przegląd_Ocen:hover,
+#Ranking_Uczniow:hover {
     background-color:black;
-    color:lawngreen;
+    
     transition:2s;
 }
 
+    #Ranking_Uczniow:hover > #text1,
+    #Przegląd_Ocen:hover > #text1,
+    #Wprowadzanie_ocen:hover > #text1 {
+        color: lawngreen !important;
+        transition: 2s;
+    }
+
+
+
+#text1 {
+    transition:2s;
+}
 
 .login,
 .pass {
@@ -84,6 +104,30 @@
         height: 120px !important;
     }
 }
+
+@media only screen and (min-width:750px) and (max-width:1070px) {
+    #powitanie {
+        text-align: center !important;
+        line-height: 30px !important;
+        margin-top: 25px !important;
+    }
+
+    #dane_tekst {
+        line-height: 25px !important;
+    }
+
+    #wylog_tekst {
+        line-height: 25px;
+    }
+
+
+    #Second_Menu {
+        height: 120px !important;
+    }
+}
+
+
+
 
 
 #second_menu {

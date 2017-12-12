@@ -1,0 +1,162 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Rank_View</title>
+
+    <link rel="stylesheet" href="~/Contents/Teacher/Rank.css" />
+
+</head>
+<body>
+    <div id="container">
+        <div id="container2">  </div>
+
+            <h2>Ranking najlepszych uczniów w całej szkole</h2>
+
+            <div id="left">
+
+                <h3>Względem całościowej średniej ocen</h3>
+
+                <ol>
+                    @foreach (var item in ViewBag.Ranking)
+                    {
+
+                        <li>
+                            <p>
+                                <em>
+
+                                    @item.Ocena @item.Imie @item.Nazwisko @item.Nazwa_Klasy
+
+                                </em>
+                            </p>
+                        </li>
+
+                    }
+                </ol>
+            </div>
+           <div id="right">
+
+               <h3>Względem poszczególnych przedmiotów</h3>
+
+               <h4> Matematyka</h4>
+
+
+               <ol>
+                   @foreach (var item in ViewBag.Matematyka)
+                   {
+
+                       <li>
+                           <p>
+                               <em>
+
+                                   @item.Ocena @item.Imie @item.Nazwisko @item.Nazwa_Klasy
+
+                               </em>
+                           </p>
+                       </li>
+
+                   }
+               </ol>
+
+               <h4>Język Polski</h4>
+
+
+
+               <ol>
+                   @foreach (var item in ViewBag.Polski)
+                   {
+
+                       <li>
+                           <p>
+                               <em>
+
+                                   @item.Ocena @item.Imie @item.Nazwisko @item.Nazwa_Klasy
+
+                               </em>
+                           </p>
+                       </li>
+
+                   }
+               </ol>
+
+
+               <h4>Język Angielski</h4>
+
+               <ol>
+                   @foreach (var item in ViewBag.Angielski)
+                   {
+
+                       <li>
+                           <p>
+                               <em>
+
+                                   @item.Ocena @item.Imie @item.Nazwisko @item.Nazwa_Klasy
+
+                               </em>
+                           </p>
+                       </li>
+
+                   }
+               </ol>
+
+
+               <h4>Chemia</h4>
+
+               <ol>
+                   @foreach (var item in ViewBag.Chemia)
+                   {
+
+                       <li>
+                           <p>
+                               <em>
+
+                                   @item.Ocena @item.Imie @item.Nazwisko @item.Nazwa_Klasy
+
+                               </em>
+                           </p>
+                       </li>
+
+                   }
+               </ol>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         
+
+
+
+
+
+          
+
+        </div>
+    </div>
+   
+</body>
+</html>

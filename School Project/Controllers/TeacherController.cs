@@ -26,7 +26,7 @@ namespace School_Project.Controllers
 
             SzkolaEntities db = new SzkolaEntities();
             Grades Grades = new Grades();
-            
+
             var Zmienna = (from table0 in db.User
                            join table1 in db.Teacher on table0.UserID equals table1.UserID
                            join table2 in db.School_Class on table1.ClassID equals table2.ClassID
@@ -79,12 +79,12 @@ namespace School_Project.Controllers
                 //var result2 = Convert.ToInt32(result);
 
 
-               
-                    var events = School.Events.ToList().Where(xx => result.Contains(xx.ClassID));
 
-                    return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
-                
-                }
+                var events = School.Events.ToList().Where(xx => result.Contains(xx.ClassID));
+
+                return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+
+            }
 
         }
 
@@ -115,7 +115,7 @@ namespace School_Project.Controllers
                 }
                 else
                 {
-                   
+
                     School.Events.Add(e);
                 }
 
@@ -525,13 +525,13 @@ namespace School_Project.Controllers
 
 
             var Klasy_II = (from table1 in db.School_Class
-                         select new Grades
-                         {
-                             ClassID = table1.ClassID,
-                             Nazwa_Klasy = table1.Nazwa,
+                            select new Grades
+                            {
+                                ClassID = table1.ClassID,
+                                Nazwa_Klasy = table1.Nazwa,
 
 
-                         }).Distinct().ToList();
+                            }).Distinct().ToList();
 
             ViewBag.Klasy_II = Klasy_II;
 
@@ -555,7 +555,7 @@ namespace School_Project.Controllers
 
 
 
-        
+
         public ActionResult Grades_View_II()
         {
 
@@ -567,9 +567,9 @@ namespace School_Project.Controllers
 
             if (TempData.ContainsKey("Przedmiot"))
             {
-                
+
                 Przedmiot = TempData["Przedmiot"].ToString().Trim();
-                
+
             }
             else
             {
@@ -581,7 +581,7 @@ namespace School_Project.Controllers
             School_Grades Grades = new School_Grades();
 
 
-            
+
 
             Data Dane = new Data();
 
@@ -608,7 +608,7 @@ namespace School_Project.Controllers
                            where
                            table2.ClassID == ID_Class &&
                            table4.Przedmiot == Przedmiot
-                           
+
                            select new Grades
                            {
 
@@ -624,16 +624,16 @@ namespace School_Project.Controllers
 
 
             double suma = 0;
-            int ilosc=  0;
+            int ilosc = 0;
             double wynik;
 
-            foreach(var item in Pobrane)
+            foreach (var item in Pobrane)
             {
-               
+
                 suma = suma + item.Ocena;
                 ilosc = ilosc + 1;
-                
-                
+
+
             }
             if (ilosc == 0)
             {
@@ -652,11 +652,11 @@ namespace School_Project.Controllers
                               }).Distinct().ToList();
             ViewBag.Przedmioty = Przedmioty;
 
-           
+
             return View("~/Views/Teacher/Grades_View_II.cshtml", "~/Views/Main_Layout.cshtml", Pobrane);
         }
 
-      
+
 
         [HttpPost]
         public ActionResult GetPrzedmiot(FormCollection fc1)
@@ -669,10 +669,94 @@ namespace School_Project.Controllers
 
 
             return RedirectToAction("Grades_View_II");
-            
+
         }
 
-       
+
+
+        [Authorize]
+        public ActionResult Rank_View()
+        {
+
+            
+            SzkolaEntities db = new SzkolaEntities();
+            Grades Grades = new Grades();
+
+
+            var Ranking = (from table1 in db.School_Class
+                           join table2 in db.Student on table1.ClassID equals table2.ClassID
+                           join table3 in db.School_Grades on table2.StudentID equals table3.StudentID
+                           join table4 in db.Teacher on table3.TeacherID equals table4.TeacherID
+                           join table5 in db.User on table2.UserID equals table5.UserID
+                           group new { table5, table3, table1 } by new { table5.Imie, table5.Nazwisko, table1.Nazwa }
+                           into grp
+                           orderby grp.Average(x => x.table3.Ocena) descending
+                           select new Grades
+                           {
+                               Imie = grp.Key.Imie,
+                             Nazwisko = grp.Key.Nazwisko,
+                             Ocena = Math.Round(grp.Average(x => x.table3.Ocena), 2),
+                             Nazwa_Klasy = grp.Key.Nazwa
+
+
+                            
+
+        }).Take(10);
+
+
+            ViewBag.Ranking = Ranking;
+
+            List<string> Przedmioty = new List<string>(new string[] { "Matematyka", "Język Polski", "Język Angielski", "Chemia" });
+
+            foreach (var Przedmiot in Przedmioty)
+            {
+
+                var SmallRanking = (from table1 in db.School_Class
+                               join table2 in db.Student on table1.ClassID equals table2.ClassID
+                               join table3 in db.School_Grades on table2.StudentID equals table3.StudentID
+                               join table4 in db.Teacher on table3.TeacherID equals table4.TeacherID
+                               join table5 in db.User on table2.UserID equals table5.UserID
+                               where table4.Przedmiot.Trim() == Przedmiot
+                               group new { table5, table3, table1 } by new { table5.Imie, table5.Nazwisko, table1.Nazwa }
+                         into grp
+                               orderby grp.Average(x => x.table3.Ocena) descending
+                               select new Grades
+                               {
+                                   Imie = grp.Key.Imie,
+                                   Nazwisko = grp.Key.Nazwisko,
+                                   Ocena = Math.Round(grp.Average(x => x.table3.Ocena),2),
+                                   Nazwa_Klasy = grp.Key.Nazwa
+
+
+
+                               }).Take(3);
+
+
+                if (Przedmiot == "Matematyka")
+                {
+                    ViewBag.Matematyka = SmallRanking;
+                }
+                else if (Przedmiot == "Język Polski")
+                {
+                    ViewBag.Polski = SmallRanking;
+                }
+                else if (Przedmiot == "Język Angielski")
+                {
+                    ViewBag.Angielski = SmallRanking;
+                }
+                else if (Przedmiot == "Chemia")
+                {
+                    ViewBag.Chemia = SmallRanking;
+                }
+
+
+
+
+            }
+
+
+            return View("~/Views/Teacher/Rank_View.cshtml", "~/Views/Main_Layout.cshtml");
+        }
 
 
     }
